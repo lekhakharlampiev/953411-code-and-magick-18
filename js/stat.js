@@ -34,7 +34,7 @@ window.renderStatistics = function (ctx, names, times) {
   var maxTime = Math.floor(getMaxElement(times));
   for (var i = 0; i < names.length; i++) {
     var barHeight = Math.floor(-(times[i] * 100) / maxTime);
-    ctx.fillStyle = 'hsl(215.25, ' + (-barHeight) + '%, ' + '30%)';
+    ctx.fillStyle = 'hsl(215.25, ' + (-barHeight / 2) + '%, ' + '30%)';
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
