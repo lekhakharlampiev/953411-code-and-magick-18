@@ -14,13 +14,11 @@ var renderCloud = function (ctx, x, y, color) {
 };
 
 var getMaxElement = function (arr) {
-  var maxElement = arr[0];
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i] > maxElement) {
-      maxElement = arr[i];
-    }
-  }
+  var maxElement = Math.max.apply(null, arr);
   return maxElement;
+};
+var getRandomSaturation = function () {
+  return Math.floor(Math.random() * 100);
 };
 
 window.renderStatistics = function (ctx, names, times) {
@@ -33,14 +31,20 @@ window.renderStatistics = function (ctx, names, times) {
 
   var maxTime = Math.floor(getMaxElement(times));
   for (var i = 0; i < names.length; i++) {
-    var barHeight = Math.floor(-(times[i] * 100) / maxTime);
+    var BAR_HEIGHT = Math.floor((times[i] * 100) / maxTime);
+    var TEXT_NAMES_X = CLOUD_X + GAP + (BAR_WIDTH + GAP) * i;
+    var TEXT_NAMES_Y = CLOUD_Y + CLOUD_HEIGHT - (GAP - TEXT_HEIGHT);
+    var TEXT_RESULT_X = CLOUD_X + GAP + (BAR_WIDTH + GAP) * i;
+    var TEXT_RESULT_Y = CLOUD_Y + CLOUD_HEIGHT - (BAR_HEIGHT + GAP + TEXT_HEIGHT);
+    var COLUMN_X = CLOUD_X + GAP + (BAR_WIDTH + GAP) * i;
+    var COLUMN_Y = CLOUD_Y + CLOUD_HEIGHT - GAP;
     ctx.fillStyle = '#333';
-    ctx.fillText(names[i], CLOUD_X + GAP + (BAR_WIDTH + GAP) * i, CLOUD_Y + CLOUD_HEIGHT - (GAP - TEXT_HEIGHT));
-    ctx.fillText(Math.floor(times[i]), CLOUD_X + GAP + (BAR_WIDTH + GAP) * i, CLOUD_Y + CLOUD_HEIGHT - (-barHeight + GAP + TEXT_HEIGHT));
-    ctx.fillStyle = 'hsl(215.25, ' + (-barHeight / 2) + '%, ' + '30%)';
+    ctx.fillText(names[i], TEXT_NAMES_X, TEXT_NAMES_Y);
+    ctx.fillText(Math.floor(times[i]), TEXT_RESULT_X, TEXT_RESULT_Y);
+    ctx.fillStyle = 'hsl(215.25, ' + getRandomSaturation() + '%, ' + '30%)';
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
-    ctx.fillRect(CLOUD_X + GAP + (BAR_WIDTH + GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP, BAR_WIDTH, barHeight);
+    ctx.fillRect(COLUMN_X, COLUMN_Y, BAR_WIDTH, -BAR_HEIGHT);
   }
 };
