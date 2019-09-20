@@ -18,15 +18,22 @@ function getRandomElement(arr) {
   return arr[Math.floor(Math.random() * (0 - arr.length)) + arr.length];
 }
 
-var similarWizards = [];
-for (var i = 0; i <  4; i++) {
+function toGeneratedProperties() {
   var wizard = {};
   wizard.name = getRandomElement(names) + ' ' + getRandomElement(surname);
   wizard.coatColor = getRandomElement(coat);
   wizard.eyesColor = getRandomElement(eyes);
-  similarWizards.push(wizard);
+  return wizard;
 }
-function getCreateItem (element, item) {
+function getGenerateObject(count) {
+  var similarWizards = [];
+  for (var i = 0; i < count; i++) {
+    similarWizards.push(toGeneratedProperties());
+  }
+  return similarWizards;
+}
+console.log(toGeneratedProperties(4));
+function getCreateItem(element, item) {
   var cloneElement = element.cloneNode(true);
   var wizardName = cloneElement.querySelector('.setup-similar-label');
   var wizardCoatColor = cloneElement.querySelector('.wizard-coat');
@@ -46,4 +53,4 @@ function getSimilarWisardsList(arr) {
 function render(element, pasteElements) {
   element.prepend(pasteElements);
 }
-render(similarList, getSimilarWisardsList(similarWizards));
+render(similarList, getSimilarWisardsList(getGenerateObject(4)));
