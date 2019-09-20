@@ -14,26 +14,27 @@ var surname = ['да Марья', 'Верон', 'Мирабелла', 'Валь�
 var coat = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var eyes = ['black', 'red', 'blue', 'yellow', 'green'];
 
-function getRandomElement(arr) {
+var getRandomElement = function (arr) {
   return arr[Math.floor(Math.random() * (0 - arr.length)) + arr.length];
-}
+};
 
-function toGeneratedProperties() {
+var toGeneratedProperties = function () {
   var wizard = {};
   wizard.name = getRandomElement(names) + ' ' + getRandomElement(surname);
   wizard.coatColor = getRandomElement(coat);
   wizard.eyesColor = getRandomElement(eyes);
   return wizard;
-}
-function getGenerateObject(count) {
+};
+
+var getGenerateObject = function (count) {
   var similarWizards = [];
   for (var i = 0; i < count; i++) {
     similarWizards.push(toGeneratedProperties());
   }
   return similarWizards;
-}
-console.log(toGeneratedProperties(4));
-function getCreateItem(element, item) {
+};
+
+var getCreateItem = function (element, item) {
   var cloneElement = element.cloneNode(true);
   var wizardName = cloneElement.querySelector('.setup-similar-label');
   var wizardCoatColor = cloneElement.querySelector('.wizard-coat');
@@ -42,15 +43,18 @@ function getCreateItem(element, item) {
   wizardCoatColor.style.fill = item.coatColor;
   wizardEyesColor.style.fill = item.eyesColor;
   return cloneElement;
-}
-function getSimilarWisardsList(arr) {
+};
+
+var getSimilarWisardsList = function (arr) {
   var fragment = new DocumentFragment();
   for (var i = 0; i < arr.length; i++) {
     fragment.prepend(getCreateItem(similarItem, arr[i]));
   }
   return fragment;
-}
-function render(element, pasteElements) {
+};
+
+var render = function (element, pasteElements) {
   element.prepend(pasteElements);
-}
+};
+
 render(similarList, getSimilarWisardsList(getGenerateObject(4)));
