@@ -10,31 +10,31 @@ setup.classList.remove('hidden');
 setupSimilar.classList.remove('hidden');
 
 var names = ['Иван', 'Хуан', 'Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-var surname = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var coat = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
+var coats = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var eyes = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var getRandomElement = function (arr) {
-  return arr[Math.floor(Math.random() * (0 - arr.length)) + arr.length];
+  return arr[Math.floor(Math.random() * arr.length)];
 };
 
-var toGeneratedProperties = function () {
+var generateProperties = function () {
   var wizard = {};
-  wizard.name = getRandomElement(names) + ' ' + getRandomElement(surname);
-  wizard.coatColor = getRandomElement(coat);
+  wizard.name = getRandomElement(names) + ' ' + getRandomElement(surnames);
+  wizard.coatColor = getRandomElement(coats);
   wizard.eyesColor = getRandomElement(eyes);
   return wizard;
 };
 
-var getGenerateObject = function (count) {
+var getGeneratedObject = function (count) {
   var similarWizards = [];
   for (var i = 0; i < count; i++) {
-    similarWizards.push(toGeneratedProperties());
+    similarWizards.push(generateProperties());
   }
   return similarWizards;
 };
 
-var getCreateItem = function (element, item) {
+var getCreatedItem = function (element, item) {
   var cloneElement = element.cloneNode(true);
   var wizardName = cloneElement.querySelector('.setup-similar-label');
   var wizardCoatColor = cloneElement.querySelector('.wizard-coat');
@@ -48,13 +48,12 @@ var getCreateItem = function (element, item) {
 var getSimilarWisardsList = function (arr) {
   var fragment = new DocumentFragment();
   for (var i = 0; i < arr.length; i++) {
-    fragment.prepend(getCreateItem(similarItem, arr[i]));
+    fragment.prepend(getCreatedItem(similarItem, arr[i]));
   }
   return fragment;
 };
 
-var render = function (element, pasteElements) {
-  element.prepend(pasteElements);
-};
+var similarProperties = getGeneratedObject(4);
+var similarWisardsList = getSimilarWisardsList(similarProperties);
 
-render(similarList, getSimilarWisardsList(getGenerateObject(4)));
+similarList.prepend(similarWisardsList);
