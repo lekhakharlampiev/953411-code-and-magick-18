@@ -26,7 +26,7 @@ var generateProperties = function () {
   return wizard;
 };
 
-var getGeneratedObject = function (count) {
+var generateOjects = function (count) {
   var similarWizards = [];
   for (var i = 0; i < count; i++) {
     similarWizards.push(generateProperties());
@@ -34,7 +34,7 @@ var getGeneratedObject = function (count) {
   return similarWizards;
 };
 
-var getCreatedItem = function (element, item) {
+var createItem = function (element, item) {
   var cloneElement = element.cloneNode(true);
   var wizardName = cloneElement.querySelector('.setup-similar-label');
   var wizardCoatColor = cloneElement.querySelector('.wizard-coat');
@@ -48,12 +48,12 @@ var getCreatedItem = function (element, item) {
 var getSimilarWisardsList = function (arr) {
   var fragment = new DocumentFragment();
   for (var i = 0; i < arr.length; i++) {
-    fragment.prepend(getCreatedItem(similarItem, arr[i]));
+    fragment.prepend(createItem(similarItem, arr[i]));
   }
   return fragment;
 };
 
-var similarProperties = getGeneratedObject(4);
+var similarProperties = generateOjects(4);
 var similarWisardsList = getSimilarWisardsList(similarProperties);
 
 similarList.prepend(similarWisardsList);
