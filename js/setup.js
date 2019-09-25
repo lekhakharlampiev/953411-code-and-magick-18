@@ -4,9 +4,9 @@ var setupSimilar = document.querySelector('.setup-similar');
 var similarList = document.querySelector('.setup-similar-list');
 var templateContent = document.querySelector('#similar-wizard-template').content;
 var similarItem = templateContent.querySelector('.setup-similar-item');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
 
-
-setup.classList.remove('hidden');
 setupSimilar.classList.remove('hidden');
 
 var names = ['Иван', 'Хуан', 'Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
@@ -55,5 +55,30 @@ var getSimilarWisardsList = function (arr) {
 
 var similarProperties = generateOjects(4);
 var similarWisardsList = getSimilarWisardsList(similarProperties);
-
 similarList.prepend(similarWisardsList);
+
+var buttonSetupOpenClickHandler = function () {
+  setup.classList.remove('hidden');
+};
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 13) {
+    buttonSetupOpenClickHandler();
+  }
+});
+
+setupOpen.addEventListener('click', buttonSetupOpenClickHandler);
+
+var buttonSetupCloseClickHandler = function () {
+  setup.classList.add('hidden');
+};
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 27) {
+    buttonSetupCloseClickHandler();
+  }
+});
+setupClose.addEventListener('click', buttonSetupCloseClickHandler);
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 13) {
+    buttonSetupCloseClickHandler();
+  }
+});
