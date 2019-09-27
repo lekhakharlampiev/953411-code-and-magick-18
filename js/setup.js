@@ -72,9 +72,12 @@ setupOpen.addEventListener('click', buttonSetupOpenClickHandler);
 var buttonSetupCloseClickHandler = function () {
   setup.classList.add('hidden');
 };
+var inputUzerName = setup.querySelector('input[name="username"]');
 document.addEventListener('keydown', function (evt) {
   if (evt.keyCode === 27) {
-    buttonSetupCloseClickHandler();
+    if (evt.target !== inputUzerName) {
+      buttonSetupCloseClickHandler();
+    }
   }
 });
 setupClose.addEventListener('click', buttonSetupCloseClickHandler);
@@ -87,16 +90,18 @@ setupClose.addEventListener('keydown', function (evt) {
 var wizardCoat = setup.querySelector('.wizard-coat');
 var wizardCoatInput = setup.querySelector('input[name="coat-color"]');
 var wizardCoatClickhandler = function () {
-  wizardCoat.style.fill = getRandomElement(coats);
-  wizardCoatInput.value = wizardCoat.style.fill;
+  var coutFill = getRandomElement(coats);
+  wizardCoat.style.fill = coutFill;
+  wizardCoatInput.value = coutFill;
 };
 wizardCoat.addEventListener('click', wizardCoatClickhandler);
 
 var wizardEyes = setup.querySelector('.wizard-eyes');
 var wizardEyesInput = setup.querySelector('input[name="eyes-color"]');
 var wizardEyesClickHandler = function () {
-  wizardEyes.style.fill = getRandomElement(eyes);
-  wizardEyesInput.value = wizardEyes.style.fill;
+  var eyeFill = getRandomElement(eyes);
+  wizardEyes.style.fill = eyeFill;
+  wizardEyesInput.value = eyeFill;
 };
 wizardEyes.addEventListener('click', wizardEyesClickHandler);
 
@@ -105,10 +110,11 @@ var fireballInput = setup.querySelector('input[name="fireball-color"]');
 
 var fireballClickhandler = function () {
   var index = fireballColors.indexOf(fireballInput.value);
-  if (index + 1 === fireballColors.length) {
+  var nexIndex = index + 1;
+  if (nexIndex === fireballColors.length) {
     fireballInput.value = fireballColors[0];
   } else {
-    fireballInput.value = fireballColors[index + 1];
+    fireballInput.value = fireballColors[nexIndex];
   }
   fireball.style.backgroundColor = fireballInput.value;
 };
