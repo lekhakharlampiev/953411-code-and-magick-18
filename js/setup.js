@@ -117,10 +117,11 @@
     var colors = data.fireball;
     var index = data.fireball.indexOf(input.value);
     var nextIndex = index + 1;
+    var nextColor = colors[nextIndex];
     if (nextIndex === colors.length) {
       input.value = colors[0];
     } else {
-      input.value = colors[nextIndex];
+      input.value = nextColor;
     }
     fireball.style.backgroundColor = input.value;
   };
