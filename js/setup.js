@@ -116,14 +116,10 @@
     var fireball = dom.wizard.fireball;
     var colors = data.fireball;
     var index = data.fireball.indexOf(input.value);
-    var nextIndex = index + 1;
+    var nextIndex = (index + 1) % colors.length;
     var nextColor = colors[nextIndex];
-    if (nextIndex === colors.length) {
-      input.value = colors[0];
-    } else {
-      input.value = nextColor;
-    }
-    fireball.style.backgroundColor = input.value;
+    input.value = nextColor;
+    fireball.style.backgroundColor = nextColor;
   };
   dom.wizard.fireball.addEventListener('click', fireballClickhandler);
 })();
