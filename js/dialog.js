@@ -11,9 +11,12 @@
     };
     var MouseMoveHandle = function (moveEvt) {
       moveEvt.preventDefault();
+      
       var move = {
-        x: 
-      }
+        x: start.x - moveEvt.clientX,
+        y: start.y - moveEvt.clientY
+      };
+      start.x = 
 
 
     };
